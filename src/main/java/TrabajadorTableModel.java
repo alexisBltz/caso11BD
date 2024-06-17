@@ -18,11 +18,11 @@ public class TrabajadorTableModel extends DefaultTableModel {
             "Código Centro Costo"
     };
 
-    private final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+    //private final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
-    private String formatDate(Date date) {
-        return (date == null) ? "" : dateFormatter.format(date);
-    }
+//    private String formatDate(Date date) {
+//        return (date == null) ? "" : dateFormatter.format(date);
+//    }
 
     public TrabajadorTableModel(List<Trabajador> trabajadores) {
         System.out.println("Se agrego trabajadores ");

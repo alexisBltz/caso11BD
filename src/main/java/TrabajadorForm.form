@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="TrabajadorForm">
-  <grid id="27dc6" binding="trabajadorPanel" layout-manager="GridLayoutManager" row-count="14" column-count="13" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="trabajadorPanel" layout-manager="GridLayoutManager" row-count="14" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="20" left="20" bottom="20" right="20"/>
     <constraints>
-      <xy x="6" y="9" width="1093" height="686"/>
+      <xy x="6" y="9" width="1053" height="686"/>
     </constraints>
     <properties>
       <background color="-327686"/>
@@ -158,42 +158,9 @@
         </constraints>
         <properties/>
       </component>
-      <component id="9edd6" class="javax.swing.JTable" binding="results" custom-create="true">
-        <constraints>
-          <grid row="1" column="3" row-span="10" col-span="10" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="1" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties>
-          <autoCreateRowSorter value="true"/>
-          <autoResizeMode value="4"/>
-          <cellSelectionEnabled value="true"/>
-          <dragEnabled value="true"/>
-          <enabled value="true"/>
-          <fillsViewportHeight value="true"/>
-          <focusCycleRoot value="true"/>
-          <focusTraversalPolicyProvider value="true"/>
-          <foreground color="-16777216"/>
-          <gridColor color="-6856305"/>
-          <inheritsPopupMenu value="true"/>
-          <rowSelectionAllowed value="true"/>
-          <selectionBackground color="-6421583"/>
-          <selectionForeground color="-1006081"/>
-          <showHorizontalLines value="true"/>
-          <showVerticalLines value="true"/>
-          <surrendersFocusOnKeystroke value="true"/>
-          <updateSelectionOnSort value="true"/>
-          <visible value="true"/>
-        </properties>
-        <clientProperties>
-          <JTable.autoStartsEdit class="java.lang.Boolean" value="true"/>
-          <Table.isFileList class="java.lang.Boolean" value="true"/>
-          <terminateEditOnFocusLost class="java.lang.Boolean" value="true"/>
-        </clientProperties>
-      </component>
       <component id="b1497" class="javax.swing.JButton" binding="actualizarButton" default-binding="true">
         <constraints>
-          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Actualizar"/>
@@ -225,7 +192,7 @@
       </component>
       <component id="db806" class="javax.swing.JButton" binding="cancelarButton" default-binding="true">
         <constraints>
-          <grid row="13" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="13" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Cancelar"/>
@@ -233,7 +200,7 @@
       </component>
       <component id="72d18" class="javax.swing.JButton" binding="salirButton" default-binding="true">
         <constraints>
-          <grid row="13" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="13" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Salir"/>
@@ -241,7 +208,7 @@
       </component>
       <component id="49296" class="javax.swing.JButton" binding="inactivarButton" default-binding="true">
         <constraints>
-          <grid row="12" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Inactivar"/>
@@ -249,7 +216,7 @@
       </component>
       <component id="606fd" class="javax.swing.JButton" binding="reactivarButton" default-binding="true">
         <constraints>
-          <grid row="12" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Reactivar"/>
@@ -281,40 +248,56 @@
       </component>
       <component id="dc709" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="11" column="7" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
       <component id="3632e" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="11" column="8" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
       <component id="820ac" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="11" column="9" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="7" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
       <component id="9ed04" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="11" column="10" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="8" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
       <component id="62b09" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="11" column="11" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="9" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
       <component id="3d083" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="11" column="12" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="10" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
+      <scrollpane id="f4e47" binding="scrollResults">
+        <constraints>
+          <grid row="1" column="3" row-span="10" col-span="7" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="51b0f" class="javax.swing.JTable" binding="results" custom-create="true">
+            <constraints/>
+            <properties>
+              <autoCreateRowSorter value="true"/>
+              <fillsViewportHeight value="true"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

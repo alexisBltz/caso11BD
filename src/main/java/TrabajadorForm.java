@@ -2,22 +2,18 @@ import org.app.Trabajador;
 import org.app.TrabajadorDAO;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
 public class TrabajadorForm extends JDialog{
 
-    private TrabajadorDAO trabajadordao = new TrabajadorDAO();
+    private TrabajadorDAO trabajadordao;
 
     private JTextField trabajadorId;
     private JTextField trabajadorNombre;
@@ -40,13 +36,14 @@ public class TrabajadorForm extends JDialog{
     private JSpinner spinnerIng;
     private JSpinner spinnerCes;
     private JSpinner spinnerVacas;
+    private JScrollPane scrollResults;
 
 
     public TrabajadorForm(JFrame parent){
         super(parent);
         setTitle("Trabajador");
         setContentPane(trabajadorPanel);
-        setMinimumSize(new Dimension(816, 474));
+        setMinimumSize(new Dimension(1400, 474));
 
         trabajadordao = new TrabajadorDAO();
         adicionarButton.addActionListener(new ActionListener() {
@@ -79,6 +76,8 @@ public class TrabajadorForm extends JDialog{
             }
         });
 
+
+
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(parent);
@@ -103,8 +102,9 @@ public class TrabajadorForm extends JDialog{
         spinnerCes.setEditor(editorCes);
         spinnerVacas.setEditor(editorVacas);
 
-        //table
+        //tableeeeeeeeeee
         DefaultTableModel modelDefault = new DefaultTableModel();
+
         modelDefault.setColumnIdentifiers(new String[] {
                 "ID", "Nombre", "Tipo de Trabajo", "Fecha de Ingreso", "Fecha de Cese", "Última Salida de Vacaciones",
                 "Estado de Trabajo", "Estado de Registro", "Cuenta Corriente Número", "Código Centro Costo"
@@ -130,24 +130,11 @@ public class TrabajadorForm extends JDialog{
             modelDefault.addRow(rowData);
         }
 
-
         results = new JTable(modelDefault);
 
+
     }
 
-    private void refreshTable() {
-        List<Trabajador> trabajadores = trabajadordao.readTrabajadores();
-        //modelDefault.setRowCount(0); // Limpiar filas existentes
-        for (Trabajador trabajador : trabajadores) {
-            Object[] rowData = {
-                    trabajador.getTrabajadorId(), trabajador.getTrabajadorNombre(), trabajador.getTrabajaTipoTraId(),
-                    trabajador.getTraFecIng(), trabajador.getTraFecCes(), trabajador.getTraFecUltSalVac(),
-                    trabajador.getTraEstTra(), trabajador.getTraEstRegTra(), trabajador.getCueCorNum(),
-                    trabajador.getCodCenCos()
-            };
-            //modelDefault.addRow(rowData);
-        }
-    }
 
 
     private Trabajador createTrabajador() {
