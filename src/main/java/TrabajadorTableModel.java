@@ -3,16 +3,26 @@ import org.app.TrabajadorDAO;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class TrabajadorTableModel extends AbstractTableModel implements TableModel {
-    private List<Trabajador> trabajadores;
+public class TrabajadorTableModel extends DefaultTableModel {
+    private final List<Trabajador> trabajadores;
 
     private final String[] columnNames = {
-            "ID", "Nombre", "Tipo de Trabajo", "Fecha de Ingreso", "Fecha de Cese", "Última Salida de Vacaciones", "Estado de Trabajo", "Estado de Registro", "Cuenta Corriente Número", "Código Centro Costo"
+            "ID", "Nombre", "Tipo de Trabajo", "Fecha de Ingreso", "Fecha de Cese",
+            "Última Salida de Vacaciones", "Estado de Trabajo", "Estado de Registro", "Cuenta Corriente Número",
+            "Código Centro Costo"
     };
+
+    private final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+
+    private String formatDate(Date date) {
+        return (date == null) ? "" : dateFormatter.format(date);
+    }
 
     public TrabajadorTableModel(List<Trabajador> trabajadores) {
         System.out.println("Se agrego trabajadores ");

@@ -2,6 +2,7 @@ import org.app.Trabajador;
 import org.app.TrabajadorDAO;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,9 +14,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 public class TrabajadorForm extends JDialog{
 
-    private TrabajadorDAO trabajadordao;
+    private TrabajadorDAO trabajadordao = new TrabajadorDAO();
 
     private JTextField trabajadorId;
     private JTextField trabajadorNombre;
@@ -47,14 +49,6 @@ public class TrabajadorForm extends JDialog{
         setMinimumSize(new Dimension(816, 474));
 
         trabajadordao = new TrabajadorDAO();
-
-        createUIComponents();
-        System.out.println("GAAAAAA");
-        TrabajadorTableModel model = cargarDatosEnTabla();
-        System.out.println(model.getColumnName(1));
-
-        results.setModel(model);
-
         adicionarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,19 +103,52 @@ public class TrabajadorForm extends JDialog{
         spinnerCes.setEditor(editorCes);
         spinnerVacas.setEditor(editorVacas);
 
-        results = new JTable();
-        results.setFillsViewportHeight(true);
-        results.setAutoCreateRowSorter(true);
-        results.setComponentPopupMenu(new JPopupMenu());
-
-
-
-    }
-
-    private TrabajadorTableModel cargarDatosEnTabla(){
+        //table
+        DefaultTableModel modelDefault = new DefaultTableModel();
+        modelDefault.setColumnIdentifiers(new String[] {
+                "ID", "Nombre", "Tipo de Trabajo", "Fecha de Ingreso", "Fecha de Cese", "Última Salida de Vacaciones",
+                "Estado de Trabajo", "Estado de Registro", "Cuenta Corriente Número", "Código Centro Costo"
+        });
+        // Cargar datos desde el DAO
+        trabajadordao = new TrabajadorDAO();
+        System.out.println(trabajadordao);
         List<Trabajador> trabajadores = trabajadordao.readTrabajadores();
-        return new TrabajadorTableModel(trabajadores);
+        System.out.println(trabajadores);
+        for (Trabajador trabajador : trabajadores) {
+            Object[] rowData = {
+                    trabajador.getTrabajadorId(),
+                    trabajador.getTrabajadorNombre(),
+                    trabajador.getTrabajaTipoTraId(),
+                    trabajador.getTraFecIng(),
+                    trabajador.getTraFecCes(),
+                    trabajador.getTraFecUltSalVac(),
+                    trabajador.getTraEstTra(),
+                    trabajador.getTraEstRegTra(),
+                    trabajador.getCueCorNum(),
+                    trabajador.getCodCenCos()
+            };
+            modelDefault.addRow(rowData);
+        }
+
+
+        results = new JTable(modelDefault);
+
     }
+
+    private void refreshTable() {
+        List<Trabajador> trabajadores = trabajadordao.readTrabajadores();
+        //modelDefault.setRowCount(0); // Limpiar filas existentes
+        for (Trabajador trabajador : trabajadores) {
+            Object[] rowData = {
+                    trabajador.getTrabajadorId(), trabajador.getTrabajadorNombre(), trabajador.getTrabajaTipoTraId(),
+                    trabajador.getTraFecIng(), trabajador.getTraFecCes(), trabajador.getTraFecUltSalVac(),
+                    trabajador.getTraEstTra(), trabajador.getTraEstRegTra(), trabajador.getCueCorNum(),
+                    trabajador.getCodCenCos()
+            };
+            //modelDefault.addRow(rowData);
+        }
+    }
+
 
     private Trabajador createTrabajador() {
         Trabajador trabajador = new Trabajador();
@@ -157,6 +184,7 @@ public class TrabajadorForm extends JDialog{
 
 
     public static void main(String[] args) {
+
         TrabajadorForm trabajadorForm = new TrabajadorForm(null);
 
     }
