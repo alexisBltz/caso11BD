@@ -47,19 +47,19 @@ public class TrabajadorForm extends JDialog{
         setMinimumSize(new Dimension(1400, 474));
 
         trabajadordao = new TrabajadorDAO();
-        adicionarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Trabajador trabajador = createTrabajador();
-                trabajadordao.createTrabajador(trabajador);
-                limpiarCampos();
+        adicionarButton.addActionListener(e -> {
 
-            }
+            Trabajador trabajador = createTrabajador();
+            trabajadordao.createTrabajador(trabajador);
+            limpiarCampos();
+            cargarLista();
         });
         modificarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                    update();
+                    limpiarCampos();
+                    cargarLista();
 
             }
         });
@@ -80,6 +80,17 @@ public class TrabajadorForm extends JDialog{
                 cargarLista();
             }
         });
+
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Entrando a cancelar");
+                results.clearSelection();
+                limpiarCampos();
+                //cargarLista();
+                trabajadorId.setEnabled(true);
+            }
+        });
         // ListSelectionListener para la tabla
         results.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -96,16 +107,14 @@ public class TrabajadorForm extends JDialog{
                     traEstRegTra.setText(results.getValueAt(selectedRow, 7).toString());
                     cueCorNum.setText(results.getValueAt(selectedRow, 8).toString());
                     codCenCos.setText(results.getValueAt(selectedRow, 9).toString());
+                    trabajadorId.setEnabled(false);
                 }
+
             }
         });
-
-
-
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setModal(true);
-        setLocationRelativeTo(parent);
-        setVisible(true);
+
+
         inactivarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,9 +125,41 @@ public class TrabajadorForm extends JDialog{
         reactivarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                activar();
+                cargarLista();
             }
         });
+
+        salirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //cerrar la ventana
+                dispose();
+            }
+        });
+
+        setModal(true);
+        setLocationRelativeTo(parent);
+        setVisible(true);
+
+
+    }
+    private void activar (){
+        //activar el estado de registro de trabajador
+        trabajadordao.activarTrabajador(Integer.parseInt(trabajadorId.getText()));
+        traEstRegTra.setText("A");
+    }
+    private void inactivar(){
+        //inactiar el estado de registro de trabajador
+        trabajadordao.inactivarTrabajador(Integer.parseInt(trabajadorId.getText()));
+        traEstRegTra.setText("I");
+
+    }
+    private void update(){
+        Trabajador trabajador = createTrabajador();
+        trabajadordao.updateTrabajador(trabajador);
+        limpiarCampos();
+        cargarLista();
     }
 
     private void createUIComponents() {
@@ -172,7 +213,26 @@ public class TrabajadorForm extends JDialog{
 
     }
 
+    private void cargarLista() {
+        List<Trabajador> lista = trabajadordao.readTrabajadores();
 
+        DefaultTableModel modelo = (DefaultTableModel) results.getModel();
+        modelo.getDataVector().clear();
+
+        for(Trabajador obj : lista) {
+            Object[] data = {obj.getTrabajadorId(),
+                             obj.getTrabajadorNombre(),
+                             obj.getTrabajaTipoTraId(),
+                             obj.getTraFecIng(),
+                             obj.getTraFecCes(),
+                             obj.getTraFecUltSalVac(),
+                             obj.getTraEstTra(),
+                             obj.getTraEstRegTra(),
+                             obj.getCueCorNum(),
+                             obj.getCodCenCos()};
+            modelo.addRow(data);
+        }
+    }
 
     private Trabajador createTrabajador() {
         Trabajador trabajador = new Trabajador();
@@ -194,29 +254,6 @@ public class TrabajadorForm extends JDialog{
         return trabajador;
     }
 
-    private void actualizarLIst(){
-        DefaultTableModel modelDefault = new DefaultTableModel();
-
-        trabajadordao = new TrabajadorDAO();
-        System.out.println(trabajadordao);
-        List<Trabajador> trabajadores = trabajadordao.readTrabajadores();
-        System.out.println(trabajadores);
-        for (Trabajador trabajador : trabajadores) {
-            Object[] rowData = {
-                    trabajador.getTrabajadorId(),
-                    trabajador.getTrabajadorNombre(),
-                    trabajador.getTrabajaTipoTraId(),
-                    trabajador.getTraFecIng(),
-                    trabajador.getTraFecCes(),
-                    trabajador.getTraFecUltSalVac(),
-                    trabajador.getTraEstTra(),
-                    trabajador.getTraEstRegTra(),
-                    trabajador.getCueCorNum(),
-                    trabajador.getCodCenCos()
-            };
-            modelDefault.addRow(rowData);
-        }
-    }
 
     private void limpiarCampos() {
         trabajadorId.setText("");

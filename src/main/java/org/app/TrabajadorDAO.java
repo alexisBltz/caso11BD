@@ -93,4 +93,30 @@ public class TrabajadorDAO {
             e.printStackTrace();
         }
     }
+
+    public void inactivarTrabajador(int i) {
+        String sql = "UPDATE tb_trabajador SET TraEstRegTra = 'I' WHERE TrabajadorId = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, i);
+            pstmt.executeUpdate();
+            System.out.println("Trabajador inactivado exitosamente!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void activarTrabajador(int i) {
+        String sql = "UPDATE tb_trabajador SET TraEstRegTra = 'A' WHERE TrabajadorId = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, i);
+            pstmt.executeUpdate();
+            System.out.println("Trabajador activado exitosamente!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
