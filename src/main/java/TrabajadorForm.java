@@ -2,6 +2,7 @@ import org.app.Trabajador;
 import org.app.TrabajadorDAO;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -59,20 +60,43 @@ public class TrabajadorForm extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
             }
         });
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                trabajadordao.deleteTrabajador(6);
+
+                trabajadordao.deleteTrabajador(Integer.parseInt(trabajadorId.getText()));
+                limpiarCampos();
+                cargarLista();
+
+
             }
         });
         actualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                List<Trabajador> trabajadores = trabajadordao.readTrabajadores();
-//                TrabajadorTableModel model = new TrabajadorTableModel(trabajadores);
-//                results.setModel((TableModel) model); // Establecer el modelo en la tabla
+                cargarLista();
+            }
+        });
+        // ListSelectionListener para la tabla
+        results.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting() && results.getSelectedRow() != -1) {
+                    int selectedRow = results.getSelectedRow();
+                    trabajadorId.setText(results.getValueAt(selectedRow, 0).toString());
+                    trabajadorNombre.setText(results.getValueAt(selectedRow, 1).toString());
+                    trabajaTipoTraId.setText(results.getValueAt(selectedRow, 2).toString());
+                    spinnerIng.setValue(results.getValueAt(selectedRow, 3));
+                    spinnerCes.setValue(results.getValueAt(selectedRow, 4));
+                    spinnerVacas.setValue(results.getValueAt(selectedRow, 5));
+                    traEstTra.setText(results.getValueAt(selectedRow, 6).toString());
+                    traEstRegTra.setText(results.getValueAt(selectedRow, 7).toString());
+                    cueCorNum.setText(results.getValueAt(selectedRow, 8).toString());
+                    codCenCos.setText(results.getValueAt(selectedRow, 9).toString());
+                }
             }
         });
 
@@ -82,6 +106,19 @@ public class TrabajadorForm extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setVisible(true);
+        inactivarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inactivar();
+                cargarLista();
+            }
+        });
+        reactivarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     private void createUIComponents() {
@@ -155,6 +192,30 @@ public class TrabajadorForm extends JDialog{
         //private JSpinner spinnerVacas;
 
         return trabajador;
+    }
+
+    private void actualizarLIst(){
+        DefaultTableModel modelDefault = new DefaultTableModel();
+
+        trabajadordao = new TrabajadorDAO();
+        System.out.println(trabajadordao);
+        List<Trabajador> trabajadores = trabajadordao.readTrabajadores();
+        System.out.println(trabajadores);
+        for (Trabajador trabajador : trabajadores) {
+            Object[] rowData = {
+                    trabajador.getTrabajadorId(),
+                    trabajador.getTrabajadorNombre(),
+                    trabajador.getTrabajaTipoTraId(),
+                    trabajador.getTraFecIng(),
+                    trabajador.getTraFecCes(),
+                    trabajador.getTraFecUltSalVac(),
+                    trabajador.getTraEstTra(),
+                    trabajador.getTraEstRegTra(),
+                    trabajador.getCueCorNum(),
+                    trabajador.getCodCenCos()
+            };
+            modelDefault.addRow(rowData);
+        }
     }
 
     private void limpiarCampos() {
