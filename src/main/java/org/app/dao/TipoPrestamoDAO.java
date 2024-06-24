@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TipoPrestamoDAO {
     public void createTipoPrestamo(TipoPrestamo tipoPrestamo) {
-        String sql = "INSERT INTO td_tipoprestamo (TipoPrestamoId, TipPresNom, TipPresEstReg) VALUES (?,?,?)";
+        String sql = "INSERT INTO tb_tipoprestamo (TipoPrestamoId, TipPresNom, TipPresEstReg) VALUES (?,?,?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -27,9 +27,9 @@ public class TipoPrestamoDAO {
         }
     }
 
-    public List<TipoPrestamo> readTipoPrestamos() {
-        List<TipoPrestamo> tipoPrestamos = new ArrayList<>();
-        String sql = "SELECT * FROM td_tipoprestamo";
+    public List<TipoPrestamo> readTiposPrestamo() {
+        List<TipoPrestamo> tiposPrestamo = new ArrayList<>();
+        String sql = "SELECT * FROM tb_tipoprestamo";
 
         try (Connection connection = DatabaseConnection.getConnection();
              Statement stmt = connection.createStatement();
@@ -40,18 +40,18 @@ public class TipoPrestamoDAO {
                 tipoPrestamo.setTipoPrestamoId(rs.getString("TipoPrestamoId").charAt(0));
                 tipoPrestamo.setTipPresNom(rs.getString("TipPresNom"));
                 tipoPrestamo.setTipPresEstReg(rs.getString("TipPresEstReg").charAt(0));
-                tipoPrestamos.add(tipoPrestamo);
+                tiposPrestamo.add(tipoPrestamo);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error al leer el registro de tipos de préstamo");
         }
-        return tipoPrestamos;
+        return tiposPrestamo;
     }
 
     public void updateTipoPrestamo(TipoPrestamo tipoPrestamo) {
-        String sql = "UPDATE td_tipoprestamo SET TipPresNom = ?, TipPresEstReg = ?  WHERE TipoPrestamoId = ?";
+        String sql = "UPDATE tb_tipoprestamo SET TipPresNom = ?, TipPresEstReg = ?  WHERE TipoPrestamoId = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -66,7 +66,7 @@ public class TipoPrestamoDAO {
     }
 
     public void deleteTipoPrestamo(Character tipoPrestamoId) {
-        String sql = "DELETE FROM td_tipoprestamo WHERE TipoPrestamoId = ?";
+        String sql = "DELETE FROM tb_tipoprestamo WHERE TipoPrestamoId = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -79,7 +79,7 @@ public class TipoPrestamoDAO {
     }
 
     public void inactivarTipoPrestamo(Character tipoPrestamoId) {
-        String sql = "UPDATE td_tipoprestamo SET TipPresEstReg = 'I' WHERE TipoPrestamoId = ?";
+        String sql = "UPDATE tb_tipoprestamo SET TipPresEstReg = 'I' WHERE TipoPrestamoId = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -92,7 +92,7 @@ public class TipoPrestamoDAO {
     }
 
     public void activarTipoPrestamo(Character tipoPrestamoId) {
-        String sql = "UPDATE td_tipoprestamo SET TipPresEstReg = 'A' WHERE TipoPrestamoId = ?";
+        String sql = "UPDATE tb_tipoprestamo SET TipPresEstReg = 'A' WHERE TipoPrestamoId = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
