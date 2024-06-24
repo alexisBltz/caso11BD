@@ -2,7 +2,7 @@ package org.app.forms;
 
 import org.app.controllers.CentroCosto;
 import org.app.dao.CentroCostoDAO;
-import org.app.forms.TablasReferencialCompania.TablasReferencialesBase;
+import org.app.forms.ModelosFormularios.TablasReferencialesBase;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;

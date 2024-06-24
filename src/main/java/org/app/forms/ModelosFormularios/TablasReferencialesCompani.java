@@ -1,15 +1,16 @@
-package org.app.forms.TablasReferencialCompania;
+package org.app.forms.ModelosFormularios;
 
 import org.app.dao.TipoTrabajadorDAO;
 
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class TablasReferencialesEmpresa extends JDialog {
+public abstract class TablasReferencialesCompani extends JDialog {
     protected TipoTrabajadorDAO tipoTrabajadorDAO;
     protected JPanel mainPanel;  // Cambié el nombre para ser más general
     protected JTextField ID;
     protected JTextField Descripcion;
+    protected JTextField EmpresaCodigo;
     protected JTextField Direccion;
     protected JTextField EstadoRegistro;
     protected JTable results;
@@ -23,7 +24,7 @@ public abstract class TablasReferencialesEmpresa extends JDialog {
     protected JLabel NombreTabla;
 
 
-    public TablasReferencialesEmpresa(JFrame frame) {
+    public TablasReferencialesCompani(JFrame frame) {
         super(frame);
         setContentPane(mainPanel);
         setMinimumSize(new Dimension(800, 470));

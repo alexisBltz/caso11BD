@@ -1,8 +1,8 @@
 package org.app.forms;
 
-import org.app.controllers.Empresa;
-import org.app.dao.EmpresaDAO;
-import org.app.forms.ModelosFormularios.TablasReferencialesEmpresa;
+import org.app.controllers.Compania;
+import org.app.dao.CompaniaDAO;
+import org.app.forms.ModelosFormularios.TablasReferencialesCompani;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -12,22 +12,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class EmpresaForm extends TablasReferencialesEmpresa {
-    private EmpresaDAO empresaDAO;
+public class CompaniaForm extends TablasReferencialesCompani {
+    private CompaniaDAO companiaDAO;
 
-    public EmpresaForm(JFrame parent) {
+    public CompaniaForm(JFrame parent) {
         super(parent);
-        setTitle("Empresa");
-        NombreTabla.setText("Empresa");
+        setTitle("Compañía");
+        NombreTabla.setText("Compañía");
 
-        empresaDAO = new EmpresaDAO();
+        companiaDAO = new CompaniaDAO();
 
         agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Empresa empresa = createEmpresa();
+                Compania compania = createCompania();
 
-                empresaDAO.createEmpresa(empresa);
+                companiaDAO.createCompania(compania);
                 limpiarCampos();
                 cargarLista();
             }
@@ -45,7 +45,7 @@ public class EmpresaForm extends TablasReferencialesEmpresa {
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                empresaDAO.deleteEmpresa(Integer.parseInt(ID.getText()));
+                companiaDAO.deleteCompania(Integer.parseInt(ID.getText()));
                 limpiarCampos();
                 cargarLista();
             }
@@ -54,7 +54,7 @@ public class EmpresaForm extends TablasReferencialesEmpresa {
         inactivarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                empresaDAO.inactivarEmpresa(Integer.parseInt(ID.getText()));
+                companiaDAO.inactivarCompania(Integer.parseInt(ID.getText()));
                 EstadoRegistro.setText("I");
                 cargarLista();
             }
@@ -63,7 +63,7 @@ public class EmpresaForm extends TablasReferencialesEmpresa {
         activarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                empresaDAO.activarEmpresa(Integer.parseInt(ID.getText()));
+                companiaDAO.activarCompania(Integer.parseInt(ID.getText()));
                 EstadoRegistro.setText("A");
                 cargarLista();
             }
@@ -90,8 +90,9 @@ public class EmpresaForm extends TablasReferencialesEmpresa {
                     int selectedRow = results.getSelectedRow();
                     ID.setText(results.getValueAt(selectedRow, 0).toString());
                     Descripcion.setText(results.getValueAt(selectedRow, 1).toString());
-                    Direccion.setText(results.getValueAt(selectedRow, 2).toString());
-                    EstadoRegistro.setText(results.getValueAt(selectedRow, 3).toString());
+                    EmpresaCodigo.setText(results.getValueAt(selectedRow, 2).toString());
+                    Direccion.setText(results.getValueAt(selectedRow, 3).toString());
+                    EstadoRegistro.setText(results.getValueAt(selectedRow, 4).toString());
                     ID.setEnabled(false);
                 }
             }
@@ -102,20 +103,21 @@ public class EmpresaForm extends TablasReferencialesEmpresa {
 
     @Override
     protected void createUIComponents() {
-        empresaDAO = new EmpresaDAO();
-        List<Empresa> empresas = empresaDAO.readEmpresas();
+        companiaDAO = new CompaniaDAO();
+        List<Compania> companias = companiaDAO.readCompanias();
 
         DefaultTableModel modelDefault = new DefaultTableModel();
         modelDefault.setColumnIdentifiers(new String[]{
-                "ID", "Nombre", "Dirección", "Estado de Registro"
+                "ID", "Nombre", "Código Empresa", "Dirección", "Estado de Registro"
         });
 
-        for (Empresa empresa : empresas) {
+        for (Compania compania : companias) {
             Object[] rowData = {
-                    empresa.getEmprCod(),
-                    empresa.getEmprNom(),
-                    empresa.getEmprDir(),
-                    empresa.getEmprEstRegEmpCod(),
+                    compania.getComCod(),
+                    compania.getComNom(),
+                    compania.getComEmprCod(),
+                    compania.getComDir(),
+                    compania.getComEstRegComCod(),
             };
             modelDefault.addRow(rowData);
         }
@@ -124,46 +126,49 @@ public class EmpresaForm extends TablasReferencialesEmpresa {
     }
 
     private void update() {
-        Empresa empresa = createEmpresa();
-        empresaDAO.updateEmpresa(empresa);
+        Compania compania = createCompania();
+        companiaDAO.updateCompania(compania);
         limpiarCampos();
         cargarLista();
     }
 
     private void cargarLista() {
-        List<Empresa> lista = empresaDAO.readEmpresas();
+        List<Compania> lista = companiaDAO.readCompanias();
 
         DefaultTableModel modelo = (DefaultTableModel) results.getModel();
         modelo.getDataVector().clear();
 
-        for (Empresa empresa : lista) {
+        for (Compania compania : lista) {
             Object[] data = {
-                    empresa.getEmprCod(),
-                    empresa.getEmprNom(),
-                    empresa.getEmprDir(),
-                    empresa.getEmprEstRegEmpCod(),
+                    compania.getComCod(),
+                    compania.getComNom(),
+                    compania.getComEmprCod(),
+                    compania.getComDir(),
+                    compania.getComEstRegComCod(),
             };
             modelo.addRow(data);
         }
     }
 
-    private Empresa createEmpresa() {
-        Empresa empresa = new Empresa();
-        empresa.setEmprCod(Integer.parseInt(ID.getText()));
-        empresa.setEmprNom(Descripcion.getText());
-        empresa.setEmprDir(Direccion.getText());
-        empresa.setEmprEstRegEmpCod(EstadoRegistro.getText().charAt(0));
-        return empresa;
+    private Compania createCompania() {
+        Compania compania = new Compania();
+        compania.setComCod(Integer.parseInt(ID.getText()));
+        compania.setComNom(Descripcion.getText());
+        compania.setComEmprCod(Integer.parseInt(EmpresaCodigo.getText()));
+        compania.setComDir(Direccion.getText());
+        compania.setComEstRegComCod(EstadoRegistro.getText().charAt(0));
+        return compania;
     }
 
     private void limpiarCampos() {
         ID.setText("");
         Descripcion.setText("");
+        EmpresaCodigo.setText("");
         Direccion.setText("");
         EstadoRegistro.setText("");
     }
 
     public static void main(String[] args) {
-        EmpresaForm empresaForm = new EmpresaForm(null);
+        CompaniaForm companiaForm = new CompaniaForm(null);
     }
 }
