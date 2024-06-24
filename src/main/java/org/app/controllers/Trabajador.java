@@ -1,4 +1,5 @@
-package org.app;
+package org.app.controllers;
+
 import java.util.Date;
 
 public class Trabajador {

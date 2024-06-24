@@ -1,4 +1,4 @@
-package org.app;
+package org.app.controllers;
 
 public class TipoTrabajador {
     private char trabajadortipoTraId;

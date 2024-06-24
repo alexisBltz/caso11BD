@@ -1,4 +1,7 @@
-package org.app;
+package org.app.dao;
+
+import org.app.DatabaseConnection;
+import org.app.controllers.TipoTrabajador;
 
 import java.sql.Connection;
 import java.sql.*;
@@ -11,12 +14,12 @@ public class TipoTrabajadorDAO {
         String sql ="INSERT INTO td_tipotrabajador (TrabajaTipoTraId, TipTrabDesc, TipTrabEstReg) VALUES (?,?,?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement(sql)){
+             PreparedStatement pstmt = connection.prepareStatement(sql)){
                 pstmt.setString(1, String.valueOf(tipoTrabajador.getTrabajadortipoTraId()));
                 pstmt.setString(2, tipoTrabajador.getTibtrabDesc());
                 pstmt.setString(3, String.valueOf(tipoTrabajador.getTrabEstReg()));
                 pstmt.executeUpdate();
-                System.out.println("Tipo Trabajador creado exitosamente!");
+                System.out.println("Tipo org.app.controllers.Trabajador creado exitosamente!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,7 +56,7 @@ public class TipoTrabajadorDAO {
             pstmt.setString(2, String.valueOf(tipoTrabajador.getTrabEstReg()));
             pstmt.setString(3, String.valueOf(tipoTrabajador.getTrabajadortipoTraId()));
             pstmt.executeUpdate();
-            System.out.println("Trabajador actualizado exitosamente!");
+            System.out.println("org.app.controllers.Trabajador actualizado exitosamente!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,7 +69,7 @@ public class TipoTrabajadorDAO {
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, String.valueOf(tipoTrabajadorId));
             pstmt.executeUpdate();
-            System.out.println("Trabajador eliminado exitosamente!");
+            System.out.println("org.app.controllers.Trabajador eliminado exitosamente!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -79,7 +82,7 @@ public class TipoTrabajadorDAO {
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, String.valueOf(tipoTrabajadorId));
             pstmt.executeUpdate();
-            System.out.println("Tipo Trabajador inactivado exitosamente!");
+            System.out.println("Tipo org.app.controllers.Trabajador inactivado exitosamente!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,7 +95,7 @@ public class TipoTrabajadorDAO {
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, String.valueOf(tipoTrabajadorId));
             pstmt.executeUpdate();
-            System.out.println("Tipo Trabajador activado exitosamente!");
+            System.out.println("Tipo org.app.controllers.Trabajador activado exitosamente!");
         } catch (SQLException e) {
             e.printStackTrace();
         }

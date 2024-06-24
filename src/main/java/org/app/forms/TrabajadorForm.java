@@ -1,5 +1,7 @@
-import org.app.Trabajador;
-import org.app.TrabajadorDAO;
+package org.app.forms;
+
+import org.app.controllers.Trabajador;
+import org.app.dao.TrabajadorDAO;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -42,7 +44,7 @@ public class TrabajadorForm extends JDialog{
 
     public TrabajadorForm(JFrame parent){
         super(parent);
-        setTitle("Trabajador");
+        setTitle("org.app.controllers.Trabajador");
         setContentPane(trabajadorPanel);
         setMinimumSize(new Dimension(1400, 474));
 

@@ -1,6 +1,7 @@
-import org.app.TipoTrabajador;
-import org.app.TipoTrabajadorDAO;
-import org.app.Trabajador;
+package org.app.forms;
+
+import org.app.controllers.TipoTrabajador;
+import org.app.dao.TipoTrabajadorDAO;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -9,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 import java.util.List;
 
 public class TipoTrabajadorForm extends JDialog{

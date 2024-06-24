@@ -1,4 +1,7 @@
-package org.app;
+package org.app.dao;
+
+import org.app.DatabaseConnection;
+import org.app.controllers.Trabajador;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ public class TrabajadorDAO {
             pstmt.setString(9, trabajador.getCueCorNum());
             pstmt.setString(10, String.valueOf(trabajador.getCodCenCos()));
             pstmt.executeUpdate();
-            System.out.println("Trabajador creado exitosamente!");
+            System.out.println("org.app.controllers.Trabajador creado exitosamente!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,7 +78,7 @@ public class TrabajadorDAO {
             pstmt.setString(9, String.valueOf(trabajador.getCodCenCos()));
             pstmt.setInt(10, trabajador.getTrabajadorId());
             pstmt.executeUpdate();
-            System.out.println("Trabajador actualizado exitosamente!");
+            System.out.println("org.app.controllers.Trabajador actualizado exitosamente!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,7 +91,7 @@ public class TrabajadorDAO {
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, trabajadorId);
             pstmt.executeUpdate();
-            System.out.println("Trabajador eliminado exitosamente!");
+            System.out.println("org.app.controllers.Trabajador eliminado exitosamente!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,7 +104,7 @@ public class TrabajadorDAO {
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, i);
             pstmt.executeUpdate();
-            System.out.println("Trabajador inactivado exitosamente!");
+            System.out.println("org.app.controllers.Trabajador inactivado exitosamente!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -114,7 +117,7 @@ public class TrabajadorDAO {
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, i);
             pstmt.executeUpdate();
-            System.out.println("Trabajador activado exitosamente!");
+            System.out.println("org.app.controllers.Trabajador activado exitosamente!");
         } catch (SQLException e) {
             e.printStackTrace();
         }

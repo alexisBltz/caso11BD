@@ -1,9 +1,12 @@
 package org.app;
 
+import org.app.dao.TrabajadorDAO;
+import org.app.controllers.Trabajador;
+
 public class App {
     public static void main(String[] args) {
         TrabajadorDAO trabajadorDAO = new TrabajadorDAO();
-        // Crear un nuevo Trabajador
+        // Crear un nuevo org.app.controllers.Trabajador
         Trabajador trabajador0 = new Trabajador();
         trabajador0.setTrabajadorId(2);
         trabajador0.setTrabajadorNombre("Alexis");
@@ -17,7 +20,7 @@ public class App {
         trabajador0.setCodCenCos('A');
         trabajadorDAO.createTrabajador(trabajador0);
 
-        // Crear un nuevo Trabajador
+        // Crear un nuevo org.app.controllers.Trabajador
         Trabajador trabajador = new Trabajador();
         trabajador.setTrabajadorId(1);
         trabajador.setTrabajadorNombre("Juan Pérez");
@@ -37,7 +40,7 @@ public class App {
             System.out.println("ID: " + t.getTrabajadorId() + ", Nombre: " + t.getTrabajadorNombre());
         }
 
-        // Actualizar un Trabajador
+        // Actualizar un org.app.controllers.Trabajador
         trabajador.setTrabajadorNombre("Carlos López");
         trabajadorDAO.updateTrabajador(trabajador);
 
@@ -47,7 +50,7 @@ public class App {
             System.out.println("ID: " + t.getTrabajadorId() + ", Nombre: " + t.getTrabajadorNombre());
         }
 
-        // Eliminar un Trabajador
+        // Eliminar un org.app.controllers.Trabajador
         trabajadorDAO.deleteTrabajador(1);
 
         // Leer y listar todos los Trabajadores después de la eliminación
